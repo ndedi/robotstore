@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a ui-sref="home">Home</a></li>
+      <li class="breadcrumb-item active">Product</li>
+    </ol>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <h4 class="card-header">
+        {{product.item.name}}
+        <strong class="float-right">{{product.item.price | currency}}</strong>
+      </h4>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Image Gallery  -->
+            <div ng-show="product.item.images.length" ng-controller="GalleryController as gallery">
+              <div class="product.item-image">
+                <img ng-src="{{product.item.images[gallery.imgIndex]}}" class="img-fluid" />
+              </div>
+              <div class="row">
+                <div class="col-md-4" ng-repeat="image in product.item.images">
+                  <img ng-src="{{image}}" ng-class="{'border border-primary': $index == gallery.imgIndex}" class="img-thumbnail" ng-click="gallery.showChange($index)">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <p class="card-text mt-4">
+              {{product.item.description}}
+            </p>
+    
+            <table class="table table-striped mt-3">
+              <tbody>
+                <tr>
+                  <td>Shine</td>
+                  <td>{{product.item.shine}}</td>
+                </tr>
+                <tr>
+                  <td>Rarity</td>
+                  <td>{{product.item.rarity}}</td>
+                </tr>
+                <tr>
+                  <td>Weight</td>
+                  <td>{{product.item.weight}}</td>
+                </tr>
+                <tr>
+                  <td>Faces</td>
+                  <td>{{product.item.faces}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <a ng-href="{{product.item.url}}" class="btn btn-primary mt-4" target="_blank">View on Amazon</a>
+        <a href="javascript:void(0)" class="btn btn-danger mt-4 float-right" target="_blank">Delete Product</a>
+      </div>
+    </div>
+  </div>
+</div>
