@@ -6,49 +6,52 @@
     </ol>
   </div>
   <div class="col-md-8">
+    <div class="alert alert-danger mb-3" ng-show="addCtrl.errorMessage.length > 0 && addCtrl.errorField.length > 0" role="alert">
+      {{addCtrl.errorField}}: {{addCtrl.errorMessage}}
+    </div>
     <form name="addProductForm" ng-submit="addCtrl.addRobot()" novalidate>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="name" class="col-form-label">Name</label>
+          <label for="name" class="col-form-label">Name *</label>
           <input type="text" class="form-control" id="name" ng-model="addCtrl.robot.name" required>
         </div>
         <div class="form-group col-md-6">
-          <label for="price" class="col-form-label">Price</label>
+          <label for="price" class="col-form-label">Price *</label>
           <input type="number" class="form-control" id="price" ng-model="addCtrl.robot.price" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="soldby" class="col-form-label">Sold By</label>
+          <label for="soldby" class="col-form-label">Sold By *</label>
           <input type="text" class="form-control" id="soldby" ng-model="addCtrl.robot.soldby" required>
         </div>
         <div class="form-group col-md-6">
-          <label for="soldby" class="col-form-label">Shipping</label>
+          <label for="soldby" class="col-form-label">Shipping *</label>
           <input type="text" class="form-control" id="shipping" ng-model="addCtrl.robot.shipping" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="itemdimension" class="col-form-label">Item Dimensions</label>
+          <label for="itemdimension" class="col-form-label">Item Dimensions *</label>
           <input type="text" class="form-control" id="itemdimension" ng-model="addCtrl.robot.dimensions" required>
         </div>
         <div class="form-group col-md-6">
-          <label for="itemweight" class="col-form-label">Item Weight</label>
+          <label for="itemweight" class="col-form-label">Item Weight *</label>
           <input type="text" class="form-control" id="itemweight" ng-model="addCtrl.robot.weight" required>
         </div>
       </div>
       <div class="form-group">
-        <label for="link" class="col-form-label">Link</label>
+        <label for="link" class="col-form-label">Link *</label>
         <input type="url" class="form-control" id="link" ng-model="addCtrl.robot.url" required>
       </div>
       <div class="form-group">
-        <label for="picture1" class="col-form-label">Pictures (URL)</label>
-        <input type="url" class="form-control mb-2" id="picture1" ng-model="addCtrl.robot.images1" required>
-        <input type="url" class="form-control mb-2" id="picture2" ng-model="addCtrl.robot.images2">
-        <input type="url" class="form-control" id="picture3" ng-model="addCtrl.robot.images3">
+        <label for="picture1" class="col-form-label">Pictures (URL) *</label>
+        <input type="url" class="form-control mb-2" id="picture1" ng-model="addCtrl.robot.image1" placeholder="Required" required>
+        <input type="url" class="form-control mb-2" id="picture2" ng-model="addCtrl.robot.image2" placeholder="Optional">
+        <input type="url" class="form-control" id="picture3" ng-model="addCtrl.robot.image3" placeholder="Optional">
       </div>
       <div class="form-group">
-        <label for="soldby" class="col-form-label">Description</label>
+        <label for="soldby" class="col-form-label">Description *</label>
         <textarea class="form-control" id="description" rows="5" ng-model="addCtrl.robot.description" required></textarea>
       </div>
       <button type="submit" class="btn btn-primary mb-3" ng-disabled="!addProductForm.$valid">Add Product</button>

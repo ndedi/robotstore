@@ -5,7 +5,7 @@
       <li class="breadcrumb-item active">Product</li>
     </ol>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-12 mb-3">
     <div class="card">
       <h4 class="card-header">
         {{product.item.name}}
@@ -34,20 +34,20 @@
             <table class="table table-striped mt-3">
               <tbody>
                 <tr>
-                  <td>Shine</td>
-                  <td>{{product.item.shine}}</td>
+                  <td>Shipping</td>
+                  <td>{{product.item.shipping}}</td>
                 </tr>
                 <tr>
-                  <td>Rarity</td>
-                  <td>{{product.item.rarity}}</td>
+                  <td>Sold by</td>
+                  <td>{{product.item.soldby}}</td>
                 </tr>
                 <tr>
                   <td>Weight</td>
                   <td>{{product.item.weight}}</td>
                 </tr>
                 <tr>
-                  <td>Faces</td>
-                  <td>{{product.item.faces}}</td>
+                  <td>Dimensions</td>
+                  <td>{{product.item.dimensions}}</td>
                 </tr>
               </tbody>
             </table>
@@ -55,7 +55,30 @@
         </div>
         
         <a ng-href="{{product.item.url}}" class="btn btn-primary mt-4" target="_blank">View on Amazon</a>
-        <a href="javascript:void(0)" class="btn btn-danger mt-4 float-right" target="_blank">Delete Product</a>
+        <button type="button" class="btn btn-danger mt-4 float-right" data-toggle="modal" data-target="#deleteProduct">
+          Delete Product
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProductLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteProductLabel">Remove a product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        Do you want to delete <strong>{{product.item.name}}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" ng-click="product.deleteProduct(product.item.id)">Delete</button>
       </div>
     </div>
   </div>

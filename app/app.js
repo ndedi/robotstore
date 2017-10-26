@@ -43,74 +43,16 @@
     };
 
     this.getProduct = function(id) {
-      return $http.get('http://localhost:8080/api/robots/' + id)
+      return $http.get('http://localhost:8080/api/robot/' + id);
     };
 
-    // this.getProduct = function(id) {
-    //   if (Number(id) == 1) {
-    //     return {
-    //       "id": 1,
-    //       "name": "Cozmo",
-    //       "description": "He’s a supercomputer and loyal sidekick all at once. Thanks to artificial intelligence, Cozmo can express hundreds of emotions.",
-    //       "shine": 8,
-    //       "price": 179.99,
-    //       "rarity": 7,
-    //       "weight": "3 pounds",
-    //       "faces": 14,
-    //       "url": "https://www.amazon.com/Anki-000-00048-Cozmo/dp/B01GA1298S/ref=sr_1_4?ie=UTF8&qid=1508208369&sr=8-4",
-    //       "images": [
-    //         "assets/img/cozmo/51V73pQXYfL.jpg",
-    //         "assets/img/cozmo/61MVY8wa4nL._SL1000_.jpg",
-    //         "assets/img/cozmo/61VBfy6ibkL._SL1093_.jpg"
-    //       ],
-    //       "reviews": [
-    //         {
-    //           "stars": 4,
-    //           "body": "The thing I’m most excited about now is playing with Cozmo’s SDK, which will hopefully allow me to unlock more of his potential and create abilities for him myself.",
-    //           "author": "book_thief@me.com",
-    //           "createdOn": 1397490980837
-    //         }, 
-    //         {
-    //           "stars": 5,
-    //           "body": "Wow, this little guy is Amazing!",
-    //           "author": "stevem@me.com",
-    //           "createdOn": 1397490980837
-    //         }
-    //       ]
-    //     };
-    //   } else if (Number(id) == 2) {
-    //     return {
-    //       "id": 2,
-    //       "name": "WowWee - MiP the Toy Robot - White",
-    //       "description": "Perched atop unique dual wheels, this multi-functional and autonomous robot is more than just a toy.",
-    //       "shine": 8,
-    //       "price": 49.99,
-    //       "rarity": 7,
-    //       "weight": "10.6 ounces",
-    //       "faces": 14,
-    //       "url": "https://www.amazon.com/WowWee-MiP-Toy-Robot-White/dp/B00KMSOIGM/ref=sr_1_5?ie=UTF8&qid=1508208369&sr=8-5",
-    //       "images": [
-    //         "assets/img/wowwee/1.jpg",
-    //         "assets/img/wowwee/2.jpg",
-    //         "assets/img/wowwee/3.jpg"
-    //       ],
-    //       "reviews": [
-    //         {
-    //           "stars": 4,
-    //           "body": "The thing I’m most excited about now is playing with Cozmo’s SDK, which will hopefully allow me to unlock more of his potential and create abilities for him myself.",
-    //           "author": "book_thief@me.com",
-    //           "createdOn": 1397490980837
-    //         }, 
-    //         {
-    //           "stars": 3,
-    //           "body": "Wow, this little guy is Amazing!",
-    //           "author": "stevem@me.com",
-    //           "createdOn": 1397490980837
-    //         }
-    //       ]
-    //     };
-    //   }
-    // }
+    this.addProduct = function(item) {
+      return $http.post('http://localhost:8080/api/robot', item);
+    };
+
+    this.deleteProduct = function(id) {
+      return $http.delete('http://localhost:8080/api/robot/' + id);
+    }
   }]);
   
   app.controller('StoreController', ['$http', 'productService', function($http, productService) {
@@ -121,9 +63,16 @@
       .then(
         function success(response) {
           _storeCtrl.products = response.data;
+
+          for(var i = 0; i < _storeCtrl.products.length; i++) {
+            _storeCtrl.products[i].images = [];
+            if( _storeCtrl.products[i].image1 != null ) _storeCtrl.products[i].images.push(_storeCtrl.products[i].image1);
+            if( _storeCtrl.products[i].image2 != null ) _storeCtrl.products[i].images.push(_storeCtrl.products[i].image2);
+            if( _storeCtrl.products[i].image3 != null ) _storeCtrl.products[i].images.push(_storeCtrl.products[i].image3);
+          }
         },
-        function error(response) {
-          console.log( response );
+        function error(err) {
+          console.log( err );
         }
       );
   }]);
@@ -136,32 +85,58 @@
     };
   });
 
-  app.controller('ProductController', ['$stateParams', 'productService', function($stateParams, productService) {
-    var _ProductCtrl = this;
+  app.controller('ProductController', ['$stateParams', '$state', 'productService', function($stateParams, $state, productService) {
+    var _productCtrl = this;
 
     productService.getProduct( $stateParams.productId )
       .then(
         function success(response) {
-          _ProductCtrl.item = response.data;
+          _productCtrl.item = response.data;
+          _productCtrl.item.images = [];
+          if( _productCtrl.item.image1 != null ) _productCtrl.item.images.push(_productCtrl.item.image1);
+          if( _productCtrl.item.image2 != null ) _productCtrl.item.images.push(_productCtrl.item.image2);
+          if( _productCtrl.item.image3 != null ) _productCtrl.item.images.push(_productCtrl.item.image3);
         },
         function error(err) {
-          console.log( err );
+          if( err.status == 404 ) {
+            $state.go('home');
+          }
         }
       );
-  }]);
 
-  app.controller('AddProductController', ['$http', function($http) {
-    this.robot = {};
-    
-    this.addRobot = function() {
-      $http.post('http://localhost:8080/api/robots', this.robot)
+    this.deleteProduct = function(id) {
+      productService.deleteProduct( id )
         .then(
           function success(response) {
-            console.log( response );
-            this.robot = {};
+            $('#deleteProduct').modal('hide');
+            $('#deleteProduct').on('hidden.bs.modal', function (e) {
+              $state.go('home');
+            })
           },
           function error(err) {
             console.log( err );
+          }
+        );
+    }
+  }]);
+
+  app.controller('AddProductController', ['$http', '$state', 'productService', function($http, $state, productService) {
+    var _addProductController = this;
+    this.robot = {};
+    this.errorMessage = '';
+    this.errorField = '';
+    
+    this.addRobot = function() {
+      productService.addProduct(this.robot)
+        .then(
+          function success(response) {
+            _addProductController.robot = {};
+            $state.go('home');
+          },
+          function error(err) {
+            console.log( err );
+            _addProductController.errorMessage = err.data.errors[0].defaultMessage;
+            _addProductController.errorField = err.data.errors[0].field;
           }
         );
     };

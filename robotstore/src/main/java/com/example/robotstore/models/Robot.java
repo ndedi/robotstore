@@ -33,6 +33,12 @@ public class Robot {
 
   private String dimensions;
 
+  private String image1;
+
+  private String image2;
+
+  private String image3;
+
   private String url;
 
   public Robot() {
@@ -123,11 +129,53 @@ public class Robot {
     return url;
   }
 
+  /**
+   * @return the image1
+   */
+  public String getImage1() {
+    return image1;
+  }
+  
+  /**
+   * @param image1 the image1 to set
+   */
+  public void setImage1(String image1) {
+    this.image1 = image1;
+  }
+  
+  /**
+   * @return the image2
+   */
+  public String getImage2() {
+    return image2;
+  }
+  
+  /**
+   * @param image2 the image2 to set
+   */
+  public void setImage2(String image2) {
+    this.image2 = image2;
+  }
+  
+  /**
+   * @return the image3
+   */
+  public String getImage3() {
+    return image3;
+  }
+  
+  /**
+   * @param image3 the image3 to set
+   */
+  public void setImage3(String image3) {
+    this.image3 = image3;
+  }
+
   @Override
   public String toString() {
     return String.format(
-      "Robot[id=%s, name=%s, createdAt=%s, description=%s, shipping=%s, price=%s, soldby=%s, weight=%s, dimensions=%s, url=%s]",
-      id, name, createdAt, description, shipping, price, soldby, weight, dimensions, url
+      "Robot[id=%s, name=%s, createdAt=%s, description=%s, shipping=%s, price=%s, soldby=%s, weight=%s, dimensions=%s, image1=%s, image2=%s, image3=%s, url=%s]",
+      id, name, createdAt, description, shipping, price, soldby, weight, dimensions, image1, image2, image3, url
     );
   }
 

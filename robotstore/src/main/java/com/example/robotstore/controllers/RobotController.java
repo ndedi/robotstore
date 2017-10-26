@@ -29,12 +29,12 @@ public class RobotController {
     return robotRepository.findAll(sortByCreatedAtDesc);
   }
 
-  @PostMapping("/robots")
+  @PostMapping("/robot")
   public Robot createRobot(@Valid @RequestBody Robot robot) {
     return robotRepository.save( robot );
   }
 
-  @GetMapping(value="/robots/{id}")
+  @GetMapping(value="/robot/{id}")
   public ResponseEntity<Robot> getRobotById(@PathVariable("id") String id) {
     Robot robot = robotRepository.findOne(id);
 
@@ -45,7 +45,7 @@ public class RobotController {
     }
   }
 
-  @PutMapping(value="/robots/{id}")
+  @PutMapping(value="/robot/{id}")
   public ResponseEntity<Robot> updateRobot(@PathVariable("id") String id,
                                           @Valid @RequestBody Robot robot) {
     Robot robotData = robotRepository.findOne(id);
@@ -63,12 +63,15 @@ public class RobotController {
     robotData.setSoldby(robot.getSoldby());
     robotData.setUrl(robot.getUrl());
     robotData.setWeight(robot.getWeight());
+    robotData.setImage1(robot.getImage1());
+    robotData.setImage2(robot.getImage2());
+    robotData.setImage3(robot.getImage3());
 
     Robot updatedRobot = robotRepository.save(robotData);
     return new ResponseEntity<>(updatedRobot, HttpStatus.OK);
   }
 
-  @DeleteMapping(value="/robots/{id}")
+  @DeleteMapping(value="/robot/{id}")
   public void deleteRobot(@PathVariable("id") String id) {
     robotRepository.delete(id);
   }

@@ -10,10 +10,15 @@
       <li class="breadcrumb-item active">Home</li>
     </ol>
   </div>
-  <div class="col-md-4" ng-repeat="product in store.products | orderBy:'price'">
+  <div class="col-md-12" ng-if="store.products.length === 0">
+    <div class="alert alert-info text-center" role="alert">
+      There is no product in the store
+    </div>
+  </div>
+  <div class="col-md-4 mb-3" ng-repeat="product in store.products | orderBy:'price'">
     <div class="card">
       <h4 class="card-header">
-        {{product.name}}
+        <a href="javascript:void(0)" ui-sref="product({ productId: product.id })" class="text-truncate">{{product.name}}</a>
         <strong class="float-right">{{product.price | currency}}</strong>
       </h4>
       <div class="card-body">
@@ -31,14 +36,14 @@
         </div>
 
         <p class="card-text mt-4">
-          {{product.description}}
+          {{product.description | limitTo: 100}} ...
         </p>
 
         <table class="table table-striped mt-3">
           <tbody>
             <tr>
-              <td>Shine</td>
-              <td>{{product.shine}}</td>
+              <td>Dimensions</td>
+              <td>{{product.dimensions}}</td>
             </tr>
             <tr>
               <td>Weight</td>
