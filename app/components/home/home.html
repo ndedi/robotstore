@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" ng-cloak>
   <div class="col-md-12">
     <ol class="breadcrumb">
       <li class="breadcrumb-item active">Home</li>
@@ -15,7 +15,7 @@
       There is no product in the store
     </div>
   </div>
-  <div class="col-md-4 mb-3" ng-repeat="product in store.products | orderBy:'price'">
+  <div class="col-md-4 mb-3 storeproduct" ng-repeat="product in store.products | orderBy:'price'">
     <div class="card">
       <h4 class="card-header">
         <a href="javascript:void(0)" ui-sref="product({ productId: product.id })" class="text-truncate">{{product.name}}</a>

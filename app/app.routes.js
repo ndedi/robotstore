@@ -1,27 +1,24 @@
-var app = angular.module('robotStore', ['ui.router']);
-
 app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'views/home/home.html',
+      templateUrl: 'app/components/home/home.html',
       controller: 'StoreController',
       controllerAs: 'store'
     })
     
     .state('product', {
       url: '/product/:productId',
-      templateUrl: 'views/product/product.html',
+      templateUrl: 'app/components/product/product.html',
       controller: 'ProductController',
-      controllerAs: 'product',
-      resolve: {}
+      controllerAs: 'product'
     })
 
     .state('add', {
       url: '/product/add',
-      templateUrl: 'views/product/add.html',
+      templateUrl: 'app/components/addproduct/add.html',
       controller: 'AddProductController',
       controllerAs: 'addCtrl'
     });

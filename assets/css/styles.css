@@ -12,3 +12,26 @@ div.product-image { height: 308px; }
 .ng-dirty.ng-valid { border-color: #28a745; }
 
 button[type="button"] { cursor: pointer; }
+
+/* ### Animation ### */
+
+.storeproduct.ng-enter,
+.storeproduct.ng-leave {
+  transition: all linear 0.25s;
+}
+ 
+.storeproduct.ng-leave {
+  opacity: 1;
+}
+ 
+.storeproduct.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+ 
+.storeproduct.ng-enter{
+  opacity: 0;
+}
+ 
+.storeproduct.ng-enter.ng-enter-active {
+  opacity: 1;
+}
