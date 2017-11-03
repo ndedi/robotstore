@@ -1,6 +1,4 @@
 describe('Product service', function() {
-  // Source: http://www.dotnetcurry.com/angularjs/1255/unit-testing-angularjs-using-jasmine-karma
-  //         https://www.youtube.com/watch?v=jwMelYBo_1A
   var productService, $httpBackend;
 
   beforeEach(angular.mock.module('robotStore'));

@@ -22,7 +22,7 @@ describe('components.product', function() {
     var ProductController;
 
     beforeEach(function() {
-      ProductController = $controller('ProductController', {ProductService: productService});
+      ProductController = $controller('ProductController');
     });
 
     it('should be defined', function() {
@@ -37,7 +37,7 @@ describe('components.product', function() {
       product = {"id":"59f1c352bb25fe71f46e8f7d","name":"Top Race Remote Control Walking Talking","createdAt":1509016402016,"description":"Top Race Remote Control Walking Talking Toy Robot, This intelligent Remote Control Robot Dances, Sings, Reads Stories, Math Quiz, Shooting Discs, and Voice Mimicking. Intelligent Robot Toy, With LED Lights and Music, Operates with Wireless Remote Control, Reads 10 Children Favorite Stories, Sings 10 Children Favorite Songs. Shoots Disc with Remote, Flash Dance, and Math Quiz, and will Imitate your Voice, and Much More. Size 12 Inches Tall, Robot Uses 5 AA Batteries, Remote Uses 2 AA Bat. (Not Included)","shipping":"FREE Shipping","price":35.99,"soldby":"Dollar Deal","weight":"2.9 pounds","dimensions":"16.9 x 11.3 x 5.7 inches","image1":"https://images-na.ssl-images-amazon.com/images/I/71uI92lAIKL._SL1116_.jpg","image2":null,"image3":null,"url":"https://www.amazon.com/Top-Race-Control-Shooting-Mimicking/dp/B072BR396W/ref=sr_1_11?ie=UTF8&qid=1509010237&sr=8-11&keywords=robot"};
       spyOn(productService, 'getProduct').and.callThrough();
       spyOn(productService, 'deleteProduct').and.callThrough();
-      ProductController = $controller('ProductController', {ProductService: productService});
+      ProductController = $controller('ProductController');
     });
 
     it('should call productService.getProduct and return a product', function() {

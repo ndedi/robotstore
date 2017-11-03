@@ -31,5 +31,5 @@ app.controller('ProductController', ['$stateParams', '$state', 'productService',
           console.log( err );
         }
       );
-  }
+  };
 }]);

@@ -1,7 +1,8 @@
-app.controller('StoreController', ['$http', 'productService', function($http, productService) {
+app.controller('StoreController', ['productService', 'titleService', function(productService, titleService) {
   var _storeCtrl = this;
   this.products = [];
 
+  titleService.setTitle( 'Welcome to the RobotStore' );
   productService.getProducts()
     .then(
       function success(response) {
