@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       },
       css: {
         src: [
-          "assets/css/bootstrap.min.css",
+          "assets/css/bootstrap.css",
           "assets/css/animate.css",
           "assets/css/styles.css"
         ],

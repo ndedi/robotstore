@@ -4558,17 +4558,6 @@ app.animation('.storeproduct', function() {
       },
       move: function(element, done) {}
     }
-  })
-  .animation('.main-view', function() {
-    return {
-      enter: function(element, done) {
-        $(element).animateCss('fadeIn');
-      },
-      leave: function(element, done) {
-        $(element).animateCss('fadeOut');
-      },
-      move: function(element, done) {}
-    }
   });;app.controller('GalleryController', function() {
   this.imgIndex = 0;
 
@@ -4600,10 +4589,11 @@ app.animation('.storeproduct', function() {
         }
       );
   };
-}]);;app.controller('StoreController', ['$http', 'productService', function($http, productService) {
+}]);;app.controller('StoreController', ['productService', 'titleService', function(productService, titleService) {
   var _storeCtrl = this;
   this.products = [];
 
+  titleService.setTitle( 'Welcome to the RobotStore' );
   productService.getProducts()
     .then(
       function success(response) {
@@ -4621,9 +4611,7 @@ app.animation('.storeproduct', function() {
       }
     );
 }]);;app.controller('ProductController', ['$stateParams', '$state', 'productService', 'titleService', function($stateParams, $state, productService, titleService) {
-  var _productCtrl = this
-      this.author = 'NTY',
-      this.description = '';
+  var _productCtrl = this;
 
   productService.getProduct( $stateParams.productId )
     .then(

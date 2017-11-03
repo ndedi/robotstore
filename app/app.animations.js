@@ -18,15 +18,4 @@ app.animation('.storeproduct', function() {
       },
       move: function(element, done) {}
     }
-  })
-  .animation('.main-view', function() {
-    return {
-      enter: function(element, done) {
-        $(element).animateCss('fadeIn');
-      },
-      leave: function(element, done) {
-        $(element).animateCss('fadeOut');
-      },
-      move: function(element, done) {}
-    }
   });
